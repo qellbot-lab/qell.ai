@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+:root {
+  /* 深邃靛蓝至暗紫渐变背景 - 调亮 */
+  --background-start: #0F0B2D;
+  /* 原 #0B0823, 稍微调亮 */
+  --background-end: #0A061F;
+  /* 原 #050212, 稍微调亮 */
+  --foreground: #ffffff;
+
+  /* 品牌色 */
+  --brand-blue: #5E84E8;
+  --brand-purple: #9461BD;
+
+  /* 状态色 */
+  --status-success: #2DD4BF;
+  /* Verified Teal */
+  --status-error: #F43F5E;
+  /* Rose */
+}
+
+@theme inline {
+  --color-background: var(--background-start);
+  --color-foreground: var(--foreground);
+  --font-inter: var(--font-inter);
+}
+
+body {
+  /* 深邃径向渐变背景 */
+  background: radial-gradient(ellipse at center, var(--background-start) 0%, var(--background-end) 100%);
+  color: var(--foreground);
+  overflow-x: hidden;
+  min-height: 100vh;
+  /* 优化字体渲染 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   文本渐变通用类 (解决 Tailwind 生成问题)
+   ============================================ */
+.text-gradient-brand {
+  background: linear-gradient(135deg, #5E84E8 0%, #9461BD 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* ============================================
+   噪点纹理 - 降低透明度至 3%
+   ============================================ */
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.03;
+  /* 降低不透明度 */
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   环境光 - 使用新配色
+   ============================================ */
+.ambient-light-top-left {
+  position: fixed;
+  top: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center,
+      rgba(94, 132, 232, 0.25) 0%,
+      /* 新品牌蓝 */
+      rgba(148, 97, 189, 0.12) 40%,
+      /* 新品牌紫 */
+      transparent 70%);
+  filter: blur(120px);
+  /* 增加模糊半径 */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-light-bottom-right {
+  position: fixed;
+  bottom: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center,
+      rgba(148, 97, 189, 0.25) 0%,
+      /* 新品牌紫 */
+      rgba(94, 132, 232, 0.15) 40%,
+      /* 新品牌蓝 */
+      transparent 70%);
+  filter: blur(140px);
+  /* 增加模糊半径 */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 额外的中央微光 - 更微妙 */
+.ambient-light-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle at center,
+      rgba(94, 132, 232, 0.05) 0%,
+      transparent 60%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   流光边框动画
+   ============================================ */
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.border-flow-animation {
+  background: linear-gradient(90deg,
+      rgba(94, 132, 232, 0.5),
+      rgba(148, 97, 189, 0.8),
+      rgba(45, 212, 191, 0.5),
+      rgba(94, 132, 232, 0.5));
+  background-size: 300% 100%;
+  animation: border-flow 4s ease infinite;
+}
+
+/* ============================================
+   呼吸灯动画 (用于滑块手柄)
+   ============================================ */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(94, 132, 232, 0.6),
+      0 0 20px rgba(148, 97, 189, 0.4);
+  }
+
+  50% {
+    box-shadow:
+      0 0 16px rgba(94, 132, 232, 0.8),
+      0 0 40px rgba(148, 97, 189, 0.6);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ============================================
+   骨架屏扫光动画
+   ============================================ */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg,
+      rgba(94, 132, 232, 0.05) 0%,
+      rgba(148, 97, 189, 0.15) 50%,
+      rgba(94, 132, 232, 0.05) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ============================================
+   自定义滚动条
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(94, 132, 232, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(94, 132, 232, 0.4), rgba(148, 97, 189, 0.4));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(94, 132, 232, 0.6), rgba(148, 97, 189, 0.6));
+}
+
+/* ============================================
+   玻璃拟态卡片基础样式
+   ============================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  /* 增加模糊度 */
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid transparent;
+  border-radius: 24px;
+  /* 更大的圆角 */
+  position: relative;
+  overflow: hidden;
+}
+
+/* 渐变边框容器 */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg,
+      rgba(94, 132, 232, 0.3) 0%,
+      rgba(148, 97, 189, 0.2) 50%,
+      rgba(94, 132, 232, 0.15) 100%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Hover 状态的双层光晕 */
+.glass-card-hover:hover {
+  box-shadow:
+    0 0 40px rgba(148, 97, 189, 0.15),
+    0 0 15px rgba(94, 132, 232, 0.25);
+  transition: box-shadow 0.4s ease;
+}

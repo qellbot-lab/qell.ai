@@ -1,0 +1,99 @@
+/* WooFi Widget Color Overrides */
+
+.el-button.el-button--primary {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--oui-gradient-brand-start)) var(--oui-gradient-brand-stop-start, 0%),
+    rgb(var(--oui-gradient-brand-mid, 92 95 255)) var(--oui-gradient-brand-stop-mid, 50.35%),
+    rgb(var(--oui-gradient-brand-end)) var(--oui-gradient-brand-stop-end, 100%)
+  ) !important;
+  border-color: rgb(var(--oui-color-primary)) !important;
+  color: rgb(var(--oui-color-primary-contrast)) !important;
+  font-size: 12px !important;
+  height: 38px !important;
+  width: 95% !important;
+  line-height: 20px !important;
+  padding: 6px 10px !important;
+}
+
+.el-button.el-button--primary:hover {
+  background: rgb(var(--oui-color-primary-light)) !important;
+  border-color: rgb(var(--oui-color-primary-light)) !important;
+}
+
+.el-button.el-button--primary.is-disabled {
+  background: rgb(var(--oui-color-base-3)) !important;
+  border-color: rgb(var(--oui-color-base-3)) !important;
+  color: rgba(var(--oui-color-base-foreground), 0.4) !important;
+}
+
+.dex .swap {
+  background: linear-gradient(135deg, rgb(var(--oui-color-base-8)) 0%, rgb(var(--oui-color-base-8)) 100%) !important;
+  border-radius: var(--oui-rounded-lg) !important;
+  border: 1px solid rgba(var(--oui-color-primary), 0.2) !important;
+}
+
+.dex .swap .block {
+  background: rgb(var(--oui-color-base-10)) !important;
+  border: 1px solid rgba(var(--oui-color-line), 0.1) !important;
+  border-radius: var(--oui-rounded-lg) !important;
+}
+
+.el-dialog {
+  background: rgb(var(--oui-color-base-8)) !important;
+  border-radius: var(--oui-rounded-lg) !important;
+  border: 1px solid rgb(var(--oui-color-line) / 0.06) !important;
+}
+
+.coin-input .input-main {
+  background: rgb(var(--oui-color-base-8)) !important;
+  border-radius: var(--oui-rounded-xl) !important;
+}
+
+.dex .swap input {
+  background: rgb(var(--oui-color-base-8)) !important;
+  color: rgb(var(--oui-color-base-foreground)) !important;
+}
+
+/* WooFi chart range switch active background */
+.switch .item.active {
+  background: rgb(var(--oui-color-base-8)) !important;
+}
+
+.switch .item {
+  color: rgba(var(--oui-color-base-foreground), 0.6) !important;
+}
+
+.switch .item:not(.active) {
+  color: rgba(var(--oui-color-base-foreground), 0.6) !important;
+}
+
+.switch .item.active {
+  color: rgb(var(--oui-color-base-foreground)) !important;
+}
+
+/* WooFi "Max" button text color */
+.max-btn {
+  color: rgb(var(--oui-color-primary)) !important;
+}
+
+/* Replace WooFi progress circle with custom refresh icon */
+.el-progress-circle {
+  position: relative;
+}
+
+.el-progress-circle svg {
+  display: none !important;
+}
+
+.el-progress-circle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background: no-repeat center/contain;
+  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M2.90918%203.36353V6.99988H6.54555%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M2%2012C2%2017.5229%206.47715%2022%2012%2022C17.5229%2022%2022%2017.5229%2022%2012C22%206.47715%2017.5229%202%2012%202C8.299%202%205.06755%204.01056%203.33839%206.99905%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");
+}
+

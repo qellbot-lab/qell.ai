@@ -1,0 +1,206 @@
+:root {
+  --oui-font-family: 'Manrope', sans-serif;
+  --oui-font-size-base: 16px;
+
+  /* colors - 默认紫色主题 */
+  --oui-color-primary: 108 74 228;
+  --oui-color-primary-light: 213 190 244;
+  /* 分页按钮背景色 */
+  --oui-color-primary-darken: 137 76 209;
+  --oui-color-primary-contrast: 255 255 255;
+
+  --oui-color-link: 189 107 237;
+  --oui-color-link-light: 217 152 250;
+
+  --oui-color-secondary: 255 255 255;
+  --oui-color-tertiary: 218 218 218;
+  --oui-color-quaternary: 218 218 218;
+
+  --oui-color-danger: 245 97 139;
+  --oui-color-danger-light: 250 167 188;
+  --oui-color-danger-darken: 237 72 122;
+  --oui-color-danger-contrast: 255 255 255;
+
+  --oui-color-success: 41 233 169;
+  --oui-color-success-light: 101 240 194;
+  --oui-color-success-darken: 0 161 120;
+  --oui-color-success-contrast: 255 255 255;
+
+  --oui-color-warning: 255 209 70;
+  --oui-color-warning-light: 245 221 132;
+  --oui-color-warning-darken: 255 152 0;
+  --oui-color-warning-contrast: 255 255 255;
+
+  --oui-color-fill: 36 32 47;
+  --oui-color-fill-active: 40 46 58;
+
+  --oui-color-base-1: 93 83 123;
+  --oui-color-base-2: 81 72 107;
+  --oui-color-base-3: 68 61 69;
+  /* 按钮悬浮背景色 */
+  --oui-color-base-4: 57 52 74;
+  /* 链选择背景色  protfolio 左侧菜单被选择颜色*/
+  --oui-color-base-5: 41 42 44;
+  /* layout背景色  输入框背景色*/
+  --oui-color-base-6: 41 42 44;
+  /* 按钮背景色 */
+  --oui-color-base-7: 41 42 44;
+  /* 提示框背景色 */
+  --oui-color-base-8: 22 23 26;
+  /* 模块背景色 */
+  --oui-color-base-9: 22 23 26;
+  /* 背景色 */
+  --oui-color-base-10: 7 9 15;
+
+  --oui-color-base-foreground: 255 255 255;
+  --oui-color-line: 255 255 255;
+/* 交易颜色 */
+  --oui-color-trading-loss: 247 75 96;
+  --oui-color-trading-loss-contrast: 255 255 255;
+  --oui-color-trading-profit: 43 194 135;
+  --oui-color-trading-profit-contrast: 255 255 255;
+
+  /* gradients */
+  --oui-gradient-primary-start: 40 0 97;
+  --oui-gradient-primary-end: 189 107 237;
+
+  --oui-gradient-secondary-start: 81 42 121;
+  --oui-gradient-secondary-end: 176 132 233;
+
+  --oui-gradient-success-start: 1 83 68;
+  --oui-gradient-success-end: 41 223 169;
+
+  --oui-gradient-danger-start: 153 24 76;
+  --oui-gradient-danger-end: 245 97 139;
+
+  --oui-gradient-brand-start: 210 211 255;
+  --oui-gradient-brand-mid: 92 95 255;
+  --oui-gradient-brand-end: 157 44 255;
+  --oui-gradient-brand-stop-start: 0%;
+  --oui-gradient-brand-stop-mid: 50.35%;
+  --oui-gradient-brand-stop-end: 100%;
+  --oui-gradient-brand-angle: 17.44deg;
+
+  --oui-gradient-warning-start: 152 58 8;
+  --oui-gradient-warning-end: 255 209 70;
+
+  --oui-gradient-neutral-start: 27 29 24;
+  --oui-gradient-neutral-end: 38 41 46;
+
+  /* rounded */
+  --oui-rounded-sm: 2px;
+  --oui-rounded: 4px;
+  --oui-rounded-md: 6px;
+  --oui-rounded-lg: 8px;
+  --oui-rounded-xl: 12px;
+  --oui-rounded-2xl: 16px;
+  --oui-rounded-full: 9999px;
+
+  /* spacing */
+  --oui-spacing-xs: 20rem;
+  --oui-spacing-sm: 22.5rem;
+  --oui-spacing-md: 26.25rem;
+  --oui-spacing-lg: 30rem;
+  --oui-spacing-xl: 33.75rem;
+}
+
+html, body {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 16px !important;
+}
+
+.orderly-app-container,
+.orderly-app-container *,
+.orderly-app-container *::before,
+.orderly-app-container *::after {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+/* 主题切换 - 亮色主题 */
+[data-theme="light"] {
+  /* 主色调 - 蓝色 */
+  --oui-color-primary: 108 74 228;
+  --oui-color-primary-light: 147 197 253;
+  /* 分页按钮背景色 */
+  --oui-color-primary-darken: 137 76 209;
+  --oui-color-primary-contrast: 0 0 0;
+
+  --oui-color-link: 29 78 216;
+  --oui-color-link-light: 59 130 246;
+
+  /* 次要颜色 */
+  --oui-color-secondary: 17 24 39;
+  --oui-color-tertiary: 55 65 81;
+  --oui-color-quaternary: 107 114 128;
+
+  /* 危险/错误颜色 */
+  --oui-color-danger: 239 68 68;
+  --oui-color-danger-light: 252 165 165;
+  --oui-color-danger-darken: 220 38 38;
+  --oui-color-danger-contrast: 255 255 255;
+
+  /* 成功颜色 */
+  --oui-color-success: 34 197 94;
+  --oui-color-success-light: 134 239 172;
+  --oui-color-success-darken: 22 163 74;
+  --oui-color-success-contrast: 255 255 255;
+
+  /* 警告颜色 */
+  --oui-color-warning: 245 158 11;
+  --oui-color-warning-light: 253 230 138;
+  --oui-color-warning-darken: 217 119 6;
+  --oui-color-warning-contrast: 255 255 255;
+
+  /* 填充色 - 白色为主 */
+  --oui-color-fill: 255 255 255;
+  --oui-color-fill-active: 249 250 251;
+
+  /* 基础颜色 - 从白色到深色 */
+  --oui-color-base-1: 255 255 255;
+  --oui-color-base-2: 248 248 248;
+  --oui-color-base-3: 243 244 246;
+  --oui-color-base-4: 229 231 235;
+  --oui-color-base-5: 209 213 219;
+  --oui-color-base-6: 240 240 240;
+  --oui-color-base-7: 240 240 240;
+  --oui-color-base-8: 255 255 255;
+  --oui-color-base-9: 255 255 255;
+  --oui-color-base-10: 248 248 248;
+
+  /* 前景色和线条色 */
+  --oui-color-base-foreground: 17 24 39;
+  --oui-color-line: 229 231 235;
+
+  /* 交易颜色 */
+  --oui-color-trading-loss: 247 75 96;
+  --oui-color-trading-loss-contrast: 255 255 255;
+  --oui-color-trading-profit: 43 194 135;
+  --oui-color-trading-profit-contrast: 255 255 255;
+
+  /* 渐变 */
+  --oui-gradient-primary-start: 147 197 253;
+  --oui-gradient-primary-end: 59 130 246;
+
+  --oui-gradient-secondary-start: 37 99 235;
+  --oui-gradient-secondary-end: 96 165 250;
+
+  --oui-gradient-success-start: 20 83 45;
+  --oui-gradient-success-end: 34 197 94;
+
+  --oui-gradient-danger-start: 153 27 27;
+  --oui-gradient-danger-end: 239 68 68;
+
+  --oui-gradient-brand-start: 210 211 255;
+  --oui-gradient-brand-mid: 92 95 255;
+  --oui-gradient-brand-end: 157 44 255;
+  --oui-gradient-brand-stop-start: 0%;
+  --oui-gradient-brand-stop-mid: 50.35%;
+  --oui-gradient-brand-stop-end: 100%;
+  --oui-gradient-brand-angle: 17.44deg;
+
+  --oui-gradient-warning-start: 120 53 15;
+  --oui-gradient-warning-end: 245 158 11;
+
+  --oui-gradient-neutral-start: 255 255 255;
+  --oui-gradient-neutral-end: 249 250 251;
+}

@@ -1,0 +1,9 @@
+export const ui = {
+  "ui.empty.description": "No results found.",
+  "ui.messageCenter.tooltip": "Check recent announcements",
+  "ui.pagination.morePages": "More pages",
+  "ui.pagination.rowsPerPage": "Rows Per Page",
+  "ui.picker.selectDate": "Select Date",
+};
+
+export type UI = typeof ui;

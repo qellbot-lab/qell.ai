@@ -1,0 +1,208 @@
+@import "@orderly.network/ui/dist/styles.css";
+@import "../styles/theme.css";
+@import "../styles/fonts.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* hide trading rewards on mobile */
+.oui-portfolio-page .oui-box.oui-flex.oui-flex-nowrap>div:nth-child(2).oui-box.oui-flex.oui-justify-start.oui-flex-nowrap.oui-relative {
+  display: none;
+}
+
+/* Home page gradient animations */
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes gradient-pulse {
+
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Twinkling stars animation */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* Home newsletter button gradient and hover */
+.home-newsletter-button {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--oui-gradient-brand-start)) var(--oui-gradient-brand-stop-start, 0%),
+    rgb(var(--oui-gradient-brand-mid, 92 95 255)) var(--oui-gradient-brand-stop-mid, 50.35%),
+    rgb(var(--oui-gradient-brand-end)) var(--oui-gradient-brand-stop-end, 100%)
+  );
+}
+
+.home-newsletter-button:hover {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--oui-gradient-brand-end)) 0%,
+    rgb(var(--oui-gradient-brand-mid, 120 124 255)) 55%,
+    rgb(var(--oui-gradient-brand-start)) 100%
+  );
+}
+
+/* 渐变线条样式 - 中间蓝色向两边渐变消失 */
+.gradient-line {
+  position: relative;
+}
+
+
+.gradient-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(40, 140, 255, 0.1) 15%,
+    rgba(40, 140, 255, 0.25) 25%,
+    rgba(40, 140, 255, 0.4) 35%,
+    rgba(40, 140, 255, 0.55) 42%,
+    rgba(40, 140, 255, 0.7) 46%,
+    rgba(40, 140, 255, 0.85) 48%,
+    rgba(40, 140, 255, 1) 50%,
+    rgba(40, 140, 255, 0.85) 52%,
+    rgba(40, 140, 255, 0.7) 54%,
+    rgba(40, 140, 255, 0.55) 58%,
+    rgba(40, 140, 255, 0.4) 65%,
+    rgba(40, 140, 255, 0.25) 75%,
+    rgba(40, 140, 255, 0.1) 85%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* 顶部渐变线 */
+.gradient-line-top::before {
+  top: 0;
+}
+
+/* 底部渐变线 */
+.gradient-line-bottom::before {
+  bottom: 0;
+}
+/* 自定义品牌渐变 - 包含中间蓝色（仅用于文本） */
+.oui-text-transparent.oui-gradient-brand,
+Text.gradient[color="brand"],
+GradientText[color="brand"] {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--oui-gradient-brand-start)) var(--oui-gradient-brand-stop-start, 0%),
+    rgb(var(--oui-gradient-brand-mid, 92 95 255)) var(--oui-gradient-brand-stop-mid, 50.35%),
+    rgb(var(--oui-gradient-brand-end)) var(--oui-gradient-brand-stop-end, 100%)
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* 按钮背景渐变 - 三色渐变包含中间蓝色 */
+button.oui-gradient-brand,
+Button.oui-gradient-brand,
+[class*="bg-gradient"][class*="brand"],
+button[class*="bg-gradient"][class*="brand"],
+[class*="oui-bg-gradient"][class*="brand"] {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--oui-gradient-brand-start)) var(--oui-gradient-brand-stop-start, 0%),
+    rgb(var(--oui-gradient-brand-mid, 92 95 255)) var(--oui-gradient-brand-stop-mid, 50.35%),
+    rgb(var(--oui-gradient-brand-end)) var(--oui-gradient-brand-stop-end, 100%)
+  ) !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  color: white !important;
+}
+
+/* Header wallet connect/address text should be white */
+.wallet-connect-button,
+.wallet-connect-button * ,
+[data-testid="oui-testid-nav-bar-connectWallet-btn"],
+[data-testid="oui-testid-nav-bar-connectWallet-btn"] * ,
+[data-testid="oui-testid-nav-bar-address-btn"],
+[data-testid="oui-testid-nav-bar-address-btn"] * {
+  color: white !important;
+}
+
+/* Light theme: force brand gradient backgrounds to black */
+[data-theme="light"] button.oui-gradient-brand,
+[data-theme="light"] Button.oui-gradient-brand,
+[data-theme="light"] [class*="bg-gradient"][class*="brand"],
+[data-theme="light"] button[class*="bg-gradient"][class*="brand"],
+[data-theme="light"] [class*="oui-bg-gradient"][class*="brand"] {
+  /* background: #000 !important; */
+}
+
+
+
+/* 确保所有使用品牌渐变的按钮文本都是白色（默认主题和亮色主题都一样） */
+/* button[style*="gradient"],
+button[class*="gradient-brand"],
+[class*="bg-gradient"][class*="brand"] *,
+[class*="oui-bg-gradient"][class*="brand"] *,
+[data-theme="light"] button[style*="gradient"],
+[data-theme="light"] button[class*="gradient-brand"],
+[data-theme="light"] [class*="bg-gradient"][class*="brand"] *,
+[data-theme="light"] [class*="oui-bg-gradient"][class*="brand"] * {
+  color: white !important;
+} */
+
+/* 亮色模式下重写 .oui-text-base-contrast-36 */
+/* [data-theme="light"] .oui-text-base-contrast-36 {
+  color: rgb(var(--oui-color-base-foreground)) !important;
+} */
+
+/* Markets tabs active text highlight */
+/* #oui-markets-home-page [role="tab"] {
+  color: rgb(var(--oui-color-base-foreground) / 0.6);
+}
+
+#oui-markets-home-page [role="tab"][data-state="active"] {
+  color: rgb(var(--oui-color-base-foreground) / 1);
+} */
+
+/* Markets pagination shape */
+/* #oui-markets-list [aria-label="pagination"] button {
+  border-radius: 9999px;
+} */
+
+/* Markets list pagination centered */
+/* #oui-markets-list [aria-label="pagination"] {
+  justify-content: center;
+  position: relative;
+} */

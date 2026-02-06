@@ -52,11 +52,32 @@ export default defineConfig(() => {
         dependencies: ["bs58", "@coral-xyz/anchor", "lodash"],
       }),
       nodePolyfills({
-        include: ["buffer", "crypto", "stream"],
+        include: ["buffer", "crypto", "stream", "path", "fs", "http", "https", "zlib", "vm"],
+        globals: {
+          Buffer: true,
+          global: true,
+          process: true,
+        },
       }),
     ],
+    resolve: {
+      alias: {
+        // 解决 @layerzerolabs/lz-utilities 在浏览器中使用 Node.js 模块的问题
+        fs: "rollup-plugin-node-polyfills/polyfills/empty",
+        path: "rollup-plugin-node-polyfills/polyfills/path",
+      },
+    },
     build: {
       outDir: "build/client",
+      rollupOptions: {
+        onwarn(warning, warn) {
+          // 忽略循环依赖警告
+          if (warning.code === 'CIRCULAR_DEPENDENCY') return;
+          // 忽略 PURE 注释警告
+          if (warning.message?.includes('/*#__PURE__*/')) return;
+          warn(warning);
+        },
+      },
     },
     optimizeDeps: {
       include: ["react", "react-dom", "react-router-dom"],

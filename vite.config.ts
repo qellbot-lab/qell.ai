@@ -70,11 +70,15 @@ export default defineConfig(() => {
     build: {
       outDir: "build/client",
       rollupOptions: {
+        // 自动为缺失的导出创建空占位符（解决 @layerzerolabs/lz-utilities 依赖 Node.js fs 模块的问题）
+        shimMissingExports: true,
         onwarn(warning, warn) {
           // 忽略循环依赖警告
           if (warning.code === 'CIRCULAR_DEPENDENCY') return;
           // 忽略 PURE 注释警告
           if (warning.message?.includes('/*#__PURE__*/')) return;
+          // 忽略 shimMissingExports 相关警告
+          if (warning.code === 'SHIMMED_EXPORT') return;
           warn(warning);
         },
       },

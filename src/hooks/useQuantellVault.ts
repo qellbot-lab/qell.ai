@@ -121,40 +121,70 @@ export function useUserPosition() {
 }
 
 /**
- * 存款 Hook
+ * 存款 Hook - 自动处理 Approve + Deposit 流程
  */
 export function useDeposit() {
     const [status, setStatus] = useState<"idle" | "approving" | "depositing" | "success" | "error">("idle");
     const [error, setError] = useState<string | null>(null);
+    const [pendingAmount, setPendingAmount] = useState<bigint | null>(null); // 存储待存款金额
 
-    const { writeContract: approve, data: approveHash, isPending: isApproving } = useWriteContract();
-    const { writeContract: deposit, data: depositHash, isPending: isDepositing } = useWriteContract();
+    const { writeContract: approve, data: approveHash, isPending: isApproving, reset: resetApprove } = useWriteContract();
+    const { writeContract: deposit, data: depositHash, isPending: isDepositing, reset: resetDeposit } = useWriteContract();
 
-    const { isSuccess: approveSuccess } = useWaitForTransactionReceipt({ hash: approveHash });
-    const { isSuccess: depositSuccess } = useWaitForTransactionReceipt({ hash: depositHash });
+    const { isSuccess: approveSuccess, isError: approveError } = useWaitForTransactionReceipt({ hash: approveHash });
+    const { isSuccess: depositSuccess, isError: depositError } = useWaitForTransactionReceipt({ hash: depositHash });
 
-    // 监听 approve 成功后自动 deposit
+    // 监听 approve 成功后自动执行 deposit
     useEffect(() => {
-        if (approveSuccess && status === "approving") {
+        if (approveSuccess && status === "approving" && pendingAmount !== null) {
+            console.log("Approve 成功，开始 Deposit...");
             setStatus("depositing");
+            deposit({
+                address: QUANTELL_VAULT_ADDRESS,
+                abi: quantellVaultAbi,
+                functionName: "deposit",
+                args: [pendingAmount],
+            });
         }
-    }, [approveSuccess, status]);
+    }, [approveSuccess, status, pendingAmount, deposit]);
 
+    // 监听 deposit 成功
     useEffect(() => {
         if (depositSuccess && status === "depositing") {
+            console.log("Deposit 成功！");
             setStatus("success");
+            setPendingAmount(null);
         }
     }, [depositSuccess, status]);
 
+    // 监听错误
+    useEffect(() => {
+        if (approveError && status === "approving") {
+            setStatus("error");
+            setError("Approve 交易失败");
+            setPendingAmount(null);
+        }
+        if (depositError && status === "depositing") {
+            setStatus("error");
+            setError("Deposit 交易失败");
+            setPendingAmount(null);
+        }
+    }, [approveError, depositError, status]);
+
     const execute = useCallback(async (amount: number, currentAllowance: number) => {
+        // 重置状态
         setStatus("idle");
         setError(null);
+        resetApprove();
+        resetDeposit();
 
         const amountWei = parseUnits(amount.toString(), 6);
+        setPendingAmount(amountWei);
 
         try {
             // 如果授权额度不足，先 approve
             if (currentAllowance < amount) {
+                console.log(`授权不足 (${currentAllowance} < ${amount})，先 Approve...`);
                 setStatus("approving");
                 approve({
                     address: USDC_ADDRESS,
@@ -163,7 +193,8 @@ export function useDeposit() {
                     args: [QUANTELL_VAULT_ADDRESS, amountWei],
                 });
             } else {
-                // 直接 deposit
+                // 授权足够，直接 deposit
+                console.log("授权足够，直接 Deposit...");
                 setStatus("depositing");
                 deposit({
                     address: QUANTELL_VAULT_ADDRESS,
@@ -175,19 +206,22 @@ export function useDeposit() {
         } catch (err) {
             setStatus("error");
             setError(err instanceof Error ? err.message : "Transaction failed");
+            setPendingAmount(null);
         }
-    }, [approve, deposit]);
+    }, [approve, deposit, resetApprove, resetDeposit]);
 
-    // 当 approve 成功后，继续 deposit
-    useEffect(() => {
-        if (approveSuccess && status === "approving") {
-            // approve 成功，开始 deposit (这需要用户记住 amount，所以这里简化处理，实际需要 state 存储)
-            // 这是简化版，完整版需要存储 pending amount
-        }
-    }, [approveSuccess, status]);
+    // 重置函数
+    const reset = useCallback(() => {
+        setStatus("idle");
+        setError(null);
+        setPendingAmount(null);
+        resetApprove();
+        resetDeposit();
+    }, [resetApprove, resetDeposit]);
 
     return {
         execute,
+        reset,
         status,
         error,
         isApproving,
